@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js基础运动</title>
+	<style>
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+		#div1{
+			width: 150px;
+			height: 200px;
+			background: green;
+			position: absolute;
+			left: -150px;
+		}
+		#div1 span{
+			position: absolute;
+			width: 20px;
+			height: 60px;
+			line-height: 20px;
+			background: blue;
+			right: -20px;
+			top: 70px;
+		}
+
+	</style>
+	<script>
+		var timer = null;
+		window.onload=function(){
+			var oDiv1 = document.getElementById("div1");
+			oDiv1.onmouseover=function(){
+				Move(0,true);
+			}
+			oDiv1.onmouseout=function(){
+				Move(-150,false);
+			}
+		};
+		function Move(target,bol){
+			var oDiv1 = document.getElementById("div1");
+			clearInterval(timer);
+			timer=setInterval(function(){
+				if(oDiv1.offsetLeft==target){
+					clearInterval(timer);
+				}
+				else{
+					if(bol){
+						oDiv1.style.left = oDiv1.offsetLeft+10+'px';
+					}
+					else{
+						oDiv1.style.left = oDiv1.offsetLeft-10+'px';
+					}
+				}
+			},40);
+		};
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<span>
+			分享到
+		</span>
+	</div>
+	
+</body>
+</html>

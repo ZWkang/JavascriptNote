@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js基础运动</title>
+	<style>
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+	#div1{
+		width: 200px;
+		height: 200px;
+		background: red;
+		filter:alpha(opacity:30);
+		opacity: 30;
+	}
+	</style>
+	<script>
+		var alpha=30;
+		var timer = null;
+		function startMove(iTarget){
+			var oDiv1 = document.getElementById("div1");
+			clearInterval(timer);
+			timer = setInterval(function(){
+				var speed = 0;
+				if(alpha<iTarget){
+					speed=10;
+				}
+				else{
+					speed=-10;
+				}
+				if(alpha==iTarget){
+					clearInterval(timer);
+				}
+				else{
+					alpha+=speed;
+					oDiv1.style.filter='alpha(opacity:'+alpha+')';
+					oDiv1.style.opacity=alpha/100;
+				}
+
+			},30);
+		}
+		window.onload=function(){
+			var oDiv1 = document.getElementById("div1");
+			oDiv1.onmouseover=function(){
+				startMove(100);
+			};
+			oDiv1.onmouseout=function(){
+				startMove(30);
+			};
+		}
+	</script>
+</head>
+<body>
+	<div id="div1">
+		
+	</div>
+	
+</body>
+</html>
