@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>变宽变窄的一个问题</title>
+	<style>
+		body{
+			padding: 0;
+			margin: 0;
+		}
+		#div1{
+			width: 200px;
+			height: 200px;
+			background: red;
+			
+		}
+	</style>
+	<script>
+		setInterval(function(){
+			var oDiv = document.getElementById("div1");
+			oDiv.style.width=oDiv.offsetWidth-1+'px';
+			//在没有border的时候，-1确实是在缩小。但是有了border之后 offsetWidth计算出来盒子模型的宽度比实际上的减去1之后的还要多。
+			//例如现在offsetWidth算出来的大小是202px
+			//我的宽度宽度时201px然后宽度实际是盒子内容宽度
+			//解决方法。用width代替offsetWidth
+		},40);
+	</script>
+</head>
+<body>
+
+	<div id="div1"></div>
+</body>
+</html>

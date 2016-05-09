@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多div淡入淡出</title>
+	<style>
+		div{
+			width: 100px;
+			height: 100px;
+			margin: 20px;
+			float: left;
+			background: red;
+			filter:alpha(opacity:30);
+			opacity:0.3;
+		}
+	</style>
+	<script>
+	//这里设置了alpha值会出现bug  导致颜色的透明度不能完全变化
+	//var alpha=30;
+	//方法是在多物体运动的时候。所有的属性值都设每个对象有相对应的一个
+	//所有东西都不能共用
+		window.onload=function(){
+			var oDiv = document.getElementsByTagName("div");
+			for(var i =0;i<oDiv.length;i++){
+				oDiv[i].alpha=30;
+				oDiv[i].onmouseover=function(){
+					startMove(this,100);
+				}
+				oDiv[i].onmouseout=function(){
+					startMove(this,30);
+				}
+			}
+		}
+		function startMove(obj,iTarget){
+			clearInterval(obj.timer);
+			obj.timer=setInterval(function(){
+				var speed = (iTarget-obj.alpha)/6;
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);
+				if(obj.alpha==iTarget){
+					clearInterval(obj.timer);
+				}else{
+					obj.alpha+=speed;
+					obj.style.filter='alpha(opacity:'+obj.alpha+')';
+					obj.style.opacity=obj.alpha/100;
+				}
+			},40);
+		}
+	</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+</body>
+</html>

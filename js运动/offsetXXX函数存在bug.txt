@@ -1,0 +1,19 @@
+offset类型函数都是用来计算盒子模型的宽度的
+而当盒子模型有了border  padding之类的时候
+offset算出来的距离往往比实际内容宽度要大
+导致运动的时候反而朝着想要的方向反方向运动
+
+
+我们可以来获取元素的实际宽度来消除这个bug
+function getStyle(obj,name){
+	if(obj.currentStyle){
+		return obj.currentStyle[name];}
+	else{
+		return getComputedStyle[name];
+	}
+}
+
+调用的时候调用parseInt(getStyle(obj,'width'));
+这样就可以获取到元素实际的样式style里面的属性值了
+
+用点的地方可以用[]表示

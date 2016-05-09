@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多个div变宽</title>
+<style>
+	div{
+		width: 200px;
+		height: 50px;
+		margin: 10px;
+		background: red;
+	}
+</style>
+<script>
+window.onload=function(){
+	var oDiv = document.getElementsByTagName("div");
+	for(var i = 0;i<oDiv.length;i++){
+		oDiv.timer=null;
+		oDiv[i].onmouseover=function(){
+			startMove(this,400);
+		};
+		oDiv[i].onmouseout=function(){
+			startMove(this,100);
+		};
+	}
+};
+	
+	function startMove(obj,iTarget){
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function(){
+			var speed = (iTarget-obj.offsetWidth)/6;
+			speed = speed>0?Math.ceil(speed):Math.floor(speed);
+			if(obj.offsetWidth==iTarget){
+				clearInterval(obj.timer);
+			}
+			else{
+				obj.style.width=obj.offsetWidth+speed+'px';
+			}
+		},40);
+	}
+</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<h2>每个div之后给一个index属性来绑定timer相当于每个div都有属于自己的定时器。然后定时器再处理对应对象的定时器</h2>
+</body>
+</html>
+

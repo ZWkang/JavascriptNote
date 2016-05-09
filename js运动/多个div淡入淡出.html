@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多div淡入淡出</title>
+	<style>
+		div{
+			width: 100px;
+			height: 100px;
+			margin: 20px;
+			float: left;
+			background: red;
+			filter:alpha(opacity:30);
+			opacity:0.3;
+		}
+	</style>
+	<script>
+	//这里设置了alpha值会出现bug  导致颜色的透明度不能完全变化
+	var alpha=30;
+		window.onload=function(){
+			var oDiv = document.getElementsByTagName("div");
+			for(var i =0;i<oDiv.length;i++){
+				oDiv[i].onmouseover=function(){
+					startMove(this,100);
+				}
+				oDiv[i].onmouseout=function(){
+					startMove(this,30);
+				}
+			}
+		}
+		function startMove(obj,iTarget){
+			clearInterval(obj.timer);
+			obj.timer=setInterval(function(){
+				var speed = (iTarget-alpha)/6;
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);
+				if(alpha==iTarget){
+					clearInterval(obj.timer);
+				}else{
+					alpha+=speed;
+					obj.style.filter='alpha(opacity:'+alpha+')';
+					obj.style.opacity=alpha/100;
+				}
+			},40);
+		}
+	</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+</body>
+</html>
